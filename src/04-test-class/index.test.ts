@@ -47,7 +47,11 @@ describe('BankAccount', () => {
   });
 
   test('should withdraw money', () => {
-    // Write your test here
+    const withdrawNum = 10;
+
+    expect(bankAccount?.withdraw(withdrawNum).getBalance()).toEqual(
+      initialBalance - withdrawNum,
+    );
   });
 
   test('should transfer money', () => {
