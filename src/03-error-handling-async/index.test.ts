@@ -1,9 +1,9 @@
 import {
   throwError,
-  // throwCustomError,
+  throwCustomError,
   resolveValue,
-  // MyAwesomeError,
-  // rejectCustomError,
+  MyAwesomeError,
+  rejectCustomError,
 } from './index';
 
 describe('resolveValue', () => {
@@ -28,12 +28,13 @@ describe('throwError', () => {
 
 describe('throwCustomError', () => {
   test('should throw custom error', () => {
-    // Write your test here
+    expect(throwCustomError).toThrowError(MyAwesomeError);
   });
 });
 
 describe('rejectCustomError', () => {
   test('should reject custom error', async () => {
-    // Write your test here
+    expect.assertions(1);
+    await expect(rejectCustomError).rejects.toThrowError(MyAwesomeError);
   });
 });
