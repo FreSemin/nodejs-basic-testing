@@ -1,8 +1,19 @@
-import { BankAccount, getBankAccount } from '.';
+import {
+  BankAccount,
+  InsufficientFundsError,
+  TransferFailedError,
+  getBankAccount,
+} from '.';
 
 const initialBalance = 12;
 
+let bankAccount: BankAccount | null = null;
+
 describe('BankAccount', () => {
+  beforeEach(() => {
+    bankAccount = getBankAccount(initialBalance);
+  });
+
   test('should create account with initial balance', () => {
     const localBankAccount: BankAccount = getBankAccount(initialBalance);
 
@@ -10,15 +21,21 @@ describe('BankAccount', () => {
   });
 
   test('should throw InsufficientFundsError error when withdrawing more than balance', () => {
-    // Write your test here
+    expect(() => {
+      bankAccount?.withdraw(initialBalance + 10);
+    }).toThrowError(InsufficientFundsError);
   });
 
   test('should throw error when transferring more than balance', () => {
-    // Write your test here
+    expect(() => {
+      bankAccount?.transfer(initialBalance + 10, getBankAccount(0));
+    }).toThrowError(InsufficientFundsError);
   });
 
   test('should throw error when transferring to the same account', () => {
-    // Write your test here
+    expect(() => {
+      bankAccount?.transfer(initialBalance, bankAccount);
+    }).toThrowError(TransferFailedError);
   });
 
   test('should deposit money', () => {
