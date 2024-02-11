@@ -1,13 +1,15 @@
 import {
   BankAccount,
   InsufficientFundsError,
+  SynchronizationFailedError,
   TransferFailedError,
   getBankAccount,
 } from '.';
+import lodash from 'lodash';
 
 describe('BankAccount', () => {
   const initialBalance = 12;
-  let bankAccount: BankAccount | null = null;
+  let bankAccount: BankAccount = getBankAccount(initialBalance);
 
   beforeEach(() => {
     bankAccount = getBankAccount(initialBalance);
@@ -62,14 +64,39 @@ describe('BankAccount', () => {
   });
 
   test('fetchBalance should return number in case if request did not failed', async () => {
-    // Write your tests here
+    expect.assertions(1);
+
+    const spy = jest.spyOn(lodash, 'random');
+
+    spy.mockReturnValueOnce(33);
+    spy.mockReturnValueOnce(1);
+
+    await expect(typeof (await bankAccount?.fetchBalance())).toBe('number');
   });
 
   test('should set new balance if fetchBalance returned number', async () => {
-    // Write your tests here
+    expect.assertions(1);
+
+    const spy = jest.spyOn(lodash, 'random');
+
+    spy.mockReturnValueOnce(33);
+    spy.mockReturnValueOnce(1);
+
+    await bankAccount.synchronizeBalance();
+
+    await expect(bankAccount.getBalance()).toBe(33);
   });
 
   test('should throw SynchronizationFailedError if fetchBalance returned null', async () => {
-    // Write your tests here
+    expect.assertions(1);
+
+    const spy = jest.spyOn(lodash, 'random');
+
+    spy.mockReturnValueOnce(33);
+    spy.mockReturnValueOnce(0);
+
+    await expect(bankAccount?.synchronizeBalance()).rejects.toThrowError(
+      SynchronizationFailedError,
+    );
   });
 });
