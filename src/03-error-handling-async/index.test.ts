@@ -1,5 +1,5 @@
 import {
-  // throwError,
+  throwError,
   // throwCustomError,
   resolveValue,
   // MyAwesomeError,
@@ -14,11 +14,15 @@ describe('resolveValue', () => {
 
 describe('throwError', () => {
   test('should throw error with provided message', () => {
-    // Write your test here
+    expect(() => {
+      throwError('provided error message');
+    }).toThrow('provided error message');
   });
 
   test('should throw error with default message if message is not provided', () => {
-    // Write your test here
+    expect(() => {
+      throwError();
+    }).toThrow('Oops!');
   });
 });
 
