@@ -8,6 +8,7 @@ import {
 
 describe('resolveValue', () => {
   test('should resolve provided value', async () => {
+    expect.assertions(1);
     await expect(resolveValue(123)).resolves.toBe(123);
   });
 });
