@@ -39,7 +39,11 @@ describe('BankAccount', () => {
   });
 
   test('should deposit money', () => {
-    // Write your test here
+    const depositNum = 33;
+
+    expect(bankAccount?.deposit(depositNum).getBalance()).toEqual(
+      initialBalance + depositNum,
+    );
   });
 
   test('should withdraw money', () => {
