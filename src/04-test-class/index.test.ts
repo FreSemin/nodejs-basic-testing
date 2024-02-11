@@ -5,11 +5,10 @@ import {
   getBankAccount,
 } from '.';
 
-const initialBalance = 12;
-
-let bankAccount: BankAccount | null = null;
-
 describe('BankAccount', () => {
+  const initialBalance = 12;
+  let bankAccount: BankAccount | null = null;
+
   beforeEach(() => {
     bankAccount = getBankAccount(initialBalance);
   });
