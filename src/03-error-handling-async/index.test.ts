@@ -1,9 +1,14 @@
-// Uncomment the code below and write your tests
-// import { throwError, throwCustomError, resolveValue, MyAwesomeError, rejectCustomError } from './index';
+import {
+  // throwError,
+  // throwCustomError,
+  resolveValue,
+  // MyAwesomeError,
+  // rejectCustomError,
+} from './index';
 
 describe('resolveValue', () => {
   test('should resolve provided value', async () => {
-    // Write your test here
+    await expect(resolveValue(123)).resolves.toBe(123);
   });
 });
 
