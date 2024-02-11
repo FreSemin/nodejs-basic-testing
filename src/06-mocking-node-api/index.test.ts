@@ -17,10 +17,6 @@ describe('doStuffByTimeout', () => {
     callback = jest.fn();
   });
 
-  afterEach((): void => {
-    jest.clearAllMocks();
-  });
-
   test('should set timeout with provided callback and timeout', () => {
     const spy: jest.SpyInstance = jest.spyOn(global, 'setTimeout');
 
